@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+
+  database:
+    image: postgres:latest
+    container_name: powerplant_db
+    env_file:
+      - 'docker-compose.env'
+    ports:
+      - 5432:5432
+  python_script:
+    build:
+      context: .
+      dockerfile: Deployment/Dockerfile
+    container_name: chart_generator
+    depends_on:
+      - database
+    volumes:
+      - ./Scripts:/app
+      - ./Deployment/requirements.txt:/app/requirements.txt
+    command: ["tail", "-f", "/dev/null"]

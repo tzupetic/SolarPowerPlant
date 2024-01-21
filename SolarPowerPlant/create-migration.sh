@@ -1,0 +1,1 @@
+dotnet ef migrations add $1 --verbose --context=PowerPlantContext && dotnet ef database update
