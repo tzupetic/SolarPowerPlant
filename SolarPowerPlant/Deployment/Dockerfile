@@ -6,6 +6,6 @@ COPY Deployment/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY Scripts/generate_chart.py .
+COPY Charts/generate_chart.py ./charts/
 
 CMD ["tail", "-f", "/dev/null"]

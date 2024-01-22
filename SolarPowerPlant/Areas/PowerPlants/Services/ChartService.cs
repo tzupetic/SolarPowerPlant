@@ -27,15 +27,9 @@ public class ChartService
 
         var dbConnectionString = StaticConfiguration.PythonConnectionStringDB;
         var dateValue = date.ToString("yyyy-MM-dd");
-        var fileName = $"line_chart_{DateTime.UtcNow.Ticks}.png";
+        var filePath = $"/app/charts/line_chart_{DateTime.UtcNow.Ticks}.png";
         var command =
-            $"exec chart_generator python generate_chart.py \"{dbConnectionString}\" \"{powerPlantId}\" \"{dateValue}\" \"{fileName}\"";
-
-        await RunPythonScript(command);
-
-        var containerPath = $"/app/{fileName}";
-        var localPath = Path.Combine("LineCharts", fileName);
-        command = $"cp chart_generator:{containerPath} {localPath}";
+            $"exec chart_generator python /app/charts/generate_chart.py \"{dbConnectionString}\" \"{powerPlantId}\" \"{dateValue}\" \"{filePath}\"";
 
         await RunPythonScript(command);
     }

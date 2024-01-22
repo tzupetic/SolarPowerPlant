@@ -17,6 +17,6 @@ services:
     depends_on:
       - database
     volumes:
-      - ./Scripts:/app
+      - ./Charts:/app/charts
       - ./Deployment/requirements.txt:/app/requirements.txt
     command: ["tail", "-f", "/dev/null"]
