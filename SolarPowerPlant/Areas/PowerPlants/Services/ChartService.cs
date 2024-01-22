@@ -7,23 +7,16 @@ namespace SolarPowerPlant.PowerPlants;
 
 public class ChartService
 {
-    private readonly PowerPlantContext _context;
+    private readonly PowerPlantService _powerPlantService;
 
-    public ChartService(PowerPlantContext context)
+    public ChartService(PowerPlantService powerPlantService)
     {
-        _context = context;
+        _powerPlantService = powerPlantService;
     }
 
     public async Task GenerateChart(Guid powerPlantId, DateOnly date)
     {
-        var powerPlant = await _context.PowerPlants.FirstOrDefaultAsync(
-            p => p.Id == powerPlantId && !p.IsDeleted
-        );
-
-        if (powerPlant == null)
-        {
-            throw new BadRequestException("Power plant does not exist");
-        }
+        await _powerPlantService.GetPowerPlantById(powerPlantId);
 
         var dbConnectionString = StaticConfiguration.PythonConnectionStringDB;
         var dateValue = date.ToString("yyyy-MM-dd");

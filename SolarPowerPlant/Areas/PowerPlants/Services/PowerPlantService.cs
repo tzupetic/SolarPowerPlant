@@ -16,7 +16,7 @@ public class PowerPlantService
         _mapper = mapper;
     }
 
-    private async Task<PowerPlant> GetPowerPlantById(Guid id)
+    public async Task<PowerPlant> GetPowerPlantById(Guid id)
     {
         return await _context.PowerPlants.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted)
             ?? throw new BadRequestException("Power plant does not exist");
