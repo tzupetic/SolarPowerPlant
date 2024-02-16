@@ -24,7 +24,6 @@ public class PowerPlantContext : DbContext
     private void seedData(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>().HasData(User.SYSTEM_USER);
-        modelBuilder.Entity<User>().Property(p => p.Id).HasIdentityOptions(2);
 
         DataGenerator.GeneratePowerPlantData(modelBuilder);
     }

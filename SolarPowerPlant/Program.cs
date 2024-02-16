@@ -169,6 +169,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UsePermissionLevel();
+
 app.MapControllers();
 
 app.Run();
